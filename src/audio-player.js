@@ -1,5 +1,5 @@
 import DomElement from "./dom-element"
-import uuidv4 from "uuid/v4"
+import uuidv4 from "uuidv4"
 
 window.AudioContext = window.AudioContext||window.webkitAudioContext
 
