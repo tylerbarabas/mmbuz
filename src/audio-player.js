@@ -15,6 +15,8 @@ export default class AudioPlayer extends DomElement {
     }
     this.dom = null
     this.id = uuid()
+
+    window.AP = this.dom
   }
 
   init() {
