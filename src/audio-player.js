@@ -15,14 +15,13 @@ export default class AudioPlayer extends DomElement {
     }
     this.dom = null
     this.id = uuid()
-
-    window.AP = this.dom
   }
 
   init() {
     this.dom = document.createElement("AUDIO")
     this.dom.id = `ap-${this.id}`
     document.body.appendChild(this.dom)
+    window.AP = this.dom
   }
 
   loadFile(audioPath){
