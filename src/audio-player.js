@@ -21,7 +21,7 @@ export default class AudioPlayer extends DomElement {
     this.dom = document.createElement("AUDIO")
     this.dom.id = `ap-${this.id}`
     document.body.appendChild(this.dom)
-    window.AP = this.dom
+    window.AP = this
   }
 
   loadFile(audioPath){
