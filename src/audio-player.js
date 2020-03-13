@@ -1,5 +1,5 @@
 import DomElement from "./dom-element"
-import { uuidv4 } from "uuidv4"
+import { uuid } from "uuidv4"
 
 window.AudioContext = window.AudioContext||window.webkitAudioContext
 
@@ -14,7 +14,7 @@ export default class AudioPlayer extends DomElement {
       title: null
     }
     this.dom = null
-    this.id = uuidv4()
+    this.id = uuid()
   }
 
   init() {
