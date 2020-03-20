@@ -9,18 +9,16 @@ export default class MasterController extends DomElement {
     }
 
     this.stage = new Stage()
-
     window.masterController = this
-
     this.sequences = seq
-
     this.init()
   }
 
   init(){
     this.currentIndex = 0
     this.addEvent("next", this.next.bind(this))
-    this.instantiateSequence()
+    this.instantiateSequences()
+    this.currentSequence = this.sequences[this.currentIndex]
   }
 
   next(){
@@ -30,10 +28,11 @@ export default class MasterController extends DomElement {
     this.currentSequence.destroy()
     this.currentIndex += 1
     this.stage.clear()
-    this.instantiateSequence()
+    this.currentSequence = this.sequences[this.currentIndex]
+    this.currentSequence.play()
   }
 
-  instantiateSequence(){
-    this.currentSequence = new this.sequences[this.currentIndex]()
+  instantiateSequences(){
+    this.sequences = this.sequences.map(s=>new s())
   }
 }

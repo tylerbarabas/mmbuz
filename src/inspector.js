@@ -13,7 +13,7 @@ export default class Inspector extends DomElement {
       top: 0,
       left: 0,
       width: "200px",
-      height: "40px",
+      height: "70px",
       backgroundColor: "pink",
       paddingLeft: "10px",
       zIndex: 9999
