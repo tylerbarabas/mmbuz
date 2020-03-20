@@ -39,7 +39,7 @@ export default class Sequence {
 
   init() {
     this.ap.addEvent("song-loaded",this.onFileLoad.bind(this))
-    this.ap.loadFile(this.audioPath)
+    this.ap.loadFile(this.audioPath, this.title)
 
     if (this.debugMode) {
       this.inspector = new Inspector(this)

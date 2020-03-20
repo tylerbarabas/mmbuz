@@ -4,7 +4,6 @@ import { uuid } from "uuidv4"
 window.AudioContext = window.AudioContext||window.webkitAudioContext
 
 export default class AudioPlayer extends DomElement {
-
   constructor(){
     super()
     this.loaded = false
@@ -24,8 +23,9 @@ export default class AudioPlayer extends DomElement {
     window.AP = this
   }
 
-  loadFile(audioPath){
+  loadFile(audioPath, audioTitle='Untitled'){
     this.currentAudio.path = audioPath
+    this.currentAudio.title = audioTitle
     this.dom.addEventListener( "loadeddata", this.onFileLoad.bind(this) )
     this.dom.src = audioPath
   }
