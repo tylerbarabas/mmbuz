@@ -19,6 +19,9 @@ export default class MasterController extends DomElement {
     this.addEvent("next", this.next.bind(this))
     this.instantiateSequences()
     this.currentSequence = this.sequences[this.currentIndex]
+    const nextSequence = this.sequences[this.currentIndex+1]
+    this.currentSequence.play()
+    this.preloadSequence(nextSequence)
   }
 
   next(){
@@ -34,5 +37,9 @@ export default class MasterController extends DomElement {
 
   instantiateSequences(){
     this.sequences = this.sequences.map(s=>new s())
+  }
+
+  preloadSequence(seq = this.currentSequence){
+    seq.preloadAssets()
   }
 }
