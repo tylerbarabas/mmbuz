@@ -1,7 +1,6 @@
 import AudioPlayer from "./audio-player"
 import Inspector from "./inspector"
 import Stage from "./stage"
-import Preloader from './preloader'
 
 export default class Sequence {
   constructor() {
@@ -21,8 +20,7 @@ export default class Sequence {
     this.songEvents = []
     this.originalSongEvents = []
 
-    this.ap = new AudioPlayer()
-    this.ap.init()
+    this.ap = null
 
     this.isLooper = false
     this.looper = {
@@ -39,14 +37,14 @@ export default class Sequence {
   }
 
   init() {
+    this.ap = new AudioPlayer()
+    this.ap.init()
     this.ap.addEvent("song-loaded",this.onFileLoad.bind(this))
     this.ap.loadFile(this.audioPath, this.title)
 
     if (this.debugMode) {
       this.inspector = new Inspector(this)
     }
-
-    this.preloader = new Preloader(this.assets)
   }
 
   onFileLoad() {
@@ -56,6 +54,7 @@ export default class Sequence {
       this.calculateSubdivisions()
       this.registerSongEvents()
     }
+    this.play()
   }
 
   calculateSubdivisions() {
@@ -85,8 +84,8 @@ export default class Sequence {
 
   play() {
     this.playing = true
-    this.ticker = setInterval(this.tick.bind(this),1)
-    this.ap.play(this.title)
+    this.ticker = setInterval(this.tick.bind(this),50)
+    this.ap.play()
   }
 
   pause() {
@@ -103,7 +102,6 @@ export default class Sequence {
 
   tick() {
     this.position = this.getPosition()
-
     if (this.debugMode) {
       if (this.isLooper) {
         if (this.position > this.looper.end) {
@@ -227,6 +225,7 @@ export default class Sequence {
   stop() {
     this.playing = false
     this.ap.stop()
+    this.stopTicker()
   }
 
   getPosition() {
@@ -238,6 +237,7 @@ export default class Sequence {
   }
 
   destroy(){
+    if (this.debugMode) this.inspector.destroy()
     this.ap.destroy()
   }
 

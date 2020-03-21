@@ -62,7 +62,9 @@ export default class AudioPlayer extends DomElement {
   }
 
   destroy(){
+    this.stop()
     this.dom.parentNode.removeChild(this.dom)
     delete this
+    delete window.AP
   }
 }

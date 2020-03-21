@@ -7,6 +7,7 @@ import Mixer from './src/mixer'
 import Sequence from './src/sequence'
 import SpriteSheet from './src/sprite-sheet'
 import Stage from './src/stage'
+import Preloader from './src/preloader'
 
 export {
   AudioPlayer,
@@ -18,4 +19,5 @@ export {
   Sequence,
   SpriteSheet,
   Stage,
+  Preloader,
 }

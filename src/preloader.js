@@ -7,7 +7,12 @@ const supported_types = {
   ],
   video: [
     'mp4',
-  ]
+  ],
+  audio: [
+    'mp3',
+    'wav',
+    'm4a',
+  ],
 }
 export default class Preloader {
   constructor(assets){
@@ -36,25 +41,32 @@ export default class Preloader {
     switch(type){
       case 'image':
         element = document.createElement('IMG')
+        element.addEventListener('load',this.assetLoaded.bind(this))
         element.src = asset
-        element.addEventListener('load', e=>{
-          this.assetsFinished.push(e.target.src)
-          console.log(this.getPercentComplete())
-        })
       break
       case 'video':
         element = document.createElement('VIDEO')
+        element.addEventListener('load',this.assetLoaded.bind(this))
         element.src = asset
       break
+      case 'audio':
+        element = document.createElement('AUDIO')
+        element.addEventListener('loadeddata',this.assetLoaded.bind(this))
+        element.src = asset
       default:
       break
     }
     return asset
   }
 
+  assetLoaded(e){
+    this.assetsFinished.push(e.target.src)
+  }
+
   getPercentComplete(){
     const numAssets = this.assets.length
-    return Math.round(100 - (this.getNumberOfAssetsRemaining() / numAssets) * 100)
+    const percentRemaining = (this.getNumberOfAssetsRemaining() / numAssets) * 100
+    return 100 - Math.round(percentRemaining)
   }
 
   getNumberOfAssetsRemaining(){
@@ -67,6 +79,8 @@ export default class Preloader {
       type = 'image'
     } else if (supported_types.video.indexOf(ext) !== -1) {
       type = 'video'
+    } else if (supported_types.audio.indexOf(ext) !== -1) {
+      type = 'audio'
     }
     return type
   }
