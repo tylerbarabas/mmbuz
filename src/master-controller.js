@@ -41,6 +41,12 @@ export default class MasterController extends DomElement {
   }
 
   preloadSequence(seq = this.currentSequence){
+    seq.preloader.addEvent('preloader-finished', this.preloadFinished.bind(this))
     seq.preloadAssets()
+  }
+
+  preloadFinished(e){
+    const { hideOverlay } = this.currentSequence
+    if (typeof hideOverlay === 'function') hideOverlay()
   }
 }
