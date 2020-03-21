@@ -1,6 +1,7 @@
 import AudioPlayer from "./audio-player"
 import Inspector from "./inspector"
 import Stage from "./stage"
+import Preloader from './preloader'
 
 export default class Sequence {
   constructor() {
@@ -28,9 +29,7 @@ export default class Sequence {
       end: 0
     }
 
-    this.assets = []
-    this.preloader = null
-
+    this.preloader = new Preloader()
     this.stage = new Stage()
 
     this.masterController = window.masterController
@@ -39,7 +38,7 @@ export default class Sequence {
   init() {
     this.ap = new AudioPlayer()
     this.ap.init()
-    this.ap.addEvent("song-loaded",this.onFileLoad.bind(this))
+    this.ap.addEvent("song-loaded",this.onSongLoaded.bind(this))
     this.ap.loadFile(this.audioPath, this.title)
 
     if (this.debugMode) {
@@ -47,7 +46,7 @@ export default class Sequence {
     }
   }
 
-  onFileLoad() {
+  onSongLoaded() {
     this.loaded = true
     this.looper.end = this.ap.dom.duration
     if (this.bpm !== null && this.timeSignature !== null &&this.instructions !== null) { 

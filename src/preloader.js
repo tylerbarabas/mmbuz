@@ -1,3 +1,5 @@
+import DomElement from './dom-element'
+
 const supported_types = {
   image: [
     'png',
@@ -14,11 +16,9 @@ const supported_types = {
     'm4a',
   ],
 }
-export default class Preloader {
-  constructor(assets){
-    if (!Array.isArray(assets)){
-      throw 'Cannot instantiate Preloader.  Assets argument must be an array.'
-    }
+export default class Preloader extends DomElement {
+  constructor(assets=[]){
+    super()
     this.assets = assets
     this.assetsStarted = []
     this.assetsFinished = []
@@ -27,6 +27,11 @@ export default class Preloader {
     this.queue = []
 
     this.totalToLoad = 0
+  }
+  load(assets){
+    if (!Array.isArray(assets)){
+      throw 'Cannot instantiate Preloader.  Assets argument must be an array.'
+    }
   }
   preloadOneAsset(asset){
     if (
@@ -61,6 +66,8 @@ export default class Preloader {
 
   assetLoaded(e){
     this.assetsFinished.push(e.target.src)
+    const pc = this.getPercentComplete()
+    if (pc === 100) this.dispatchEvent('preloader-finished')
   }
 
   getPercentComplete(){
