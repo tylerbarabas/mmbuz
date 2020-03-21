@@ -84,14 +84,14 @@ export default class Sequence {
 
   play() {
     this.playing = true
-    this.ticker = setInterval(this.tick.bind(this),50)
+    this.ticker = setInterval(this.tick.bind(this),41)
     this.ap.play()
   }
 
   pause() {
     this.playing = false
-    this.ap.pause()
     this.stopTicker()
+    this.ap.pause()
   }
 
   resetLooper(){
@@ -135,7 +135,7 @@ export default class Sequence {
   registerSongEvents() {
     for (let i in this.instructions){
       if (typeof this[this.instructions[i][0]] === "undefined") {
-        console.error("Function " + this.instructions[i][0] + " not found. Skipping...")
+        console.error(`Function ${this.instructions[i][0]} not found. Skipping...`)
         continue
       }
       let func = this[this.instructions[i][0]].bind(this),

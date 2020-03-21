@@ -43,8 +43,7 @@ export default class AudioPlayer extends DomElement {
 
   pause(){
     this.playing = false
-    this.dom.pause()
-    this.dispatchEvent("pause")
+    this.dom.pause() // pause event will dispatch
   }
 
   stop(){

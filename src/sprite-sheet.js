@@ -11,8 +11,7 @@ export default class SpriteSheet extends DomElement {
 
   init( append = true ){
     if (typeof this.json !== "object") {
-      console.error("Cannot init sprite sheet. No JSON present.")
-      return
+      throw 'Cannot init sprite sheet. No JSON present.'
     }
 
     this.spritesheet = new createjs.SpriteSheet(this.json)
