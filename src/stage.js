@@ -92,4 +92,17 @@ export default class Stage extends DomElement {
     }
     this.setBackdrop("")
   }
+
+  requestFullScreen(element = document.body) {
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen
+
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element)
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell")
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}")
+        }
+    }
+  } 
 }
