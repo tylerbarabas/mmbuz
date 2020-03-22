@@ -37,7 +37,8 @@ export default class Stage extends DomElement {
       throw "Cannot init Stage, instance already exists."
     }
 
-    document.body.appendChild(this.dom)
+    this.mainContainer = document.getElementById('main-container')
+    this.mainContainer.appendChild(this.dom)
     this.dom.appendChild(this.overlay)
 
     setTimeout(function(){
@@ -55,15 +56,12 @@ export default class Stage extends DomElement {
     let scale_h = window.innerHeight / div_h
 
     this.pageScale = Math.min(scale_w, scale_h)
-    document.body.style.webkitTransform = "scale(" + this.pageScale + ")"
-    document.body.style.msTransform = "scale(" + this.pageScale + ")"
-    document.body.style.transform = "scale(" + this.pageScale + ")"
+    this.mainContainer.style.webkitTransform = "scale(" + this.pageScale + ")"
+    this.mainContainer.style.msTransform = "scale(" + this.pageScale + ")"
+    this.mainContainer.style.transform = "scale(" + this.pageScale + ")"
 
-    let move_x = ( window.innerWidth - this.dom.clientWidth * this.pageScale) / 2
-    let move_y = ( window.innerHeight - this.dom.clientHeight * this.pageScale) / 2
-
-    move_x = (move_x / this.pageScale) - 10
-    move_y = (move_y / this.pageScale) - 7
+    let move_x = ( window.innerWidth - this.dom.clientWidth) / 2
+    let move_y = ( window.innerHeight - this.dom.clientHeight) / 2
 
     this.dom.style.top = move_y + "px"
     this.dom.style.left = move_x + "px"
