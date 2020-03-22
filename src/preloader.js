@@ -68,6 +68,9 @@ export default class Preloader extends DomElement {
     this.assetsFinished.push(e.target.src)
     const pc = this.getPercentComplete()
     if (pc === 100) this.dispatchEvent('preloader-finished')
+    this.dispatchEvent('preloader-asset-loaded', {
+      percentComplete: this.getPercentComplete(),
+    })
     e.target.removeEventListener('loadeddata', this.assetLoaded.bind(this))
   }
 
