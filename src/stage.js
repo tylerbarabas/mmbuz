@@ -93,9 +93,9 @@ export default class Stage extends DomElement {
   }
 
   requestFullScreen(element = document.body) {
-    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen
-  console.log('screenfull is enabled?', screenfull.isEnabled)
-  if (screenfull.isEnabled) {
-      screenfull.request(element)
+    console.log('screenfull is enabled?', screenfull.isEnabled)
+    if (screenfull.isEnabled) {
+        screenfull.request(element)
+    }
   }
 }
