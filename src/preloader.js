@@ -51,14 +51,12 @@ export default class Preloader extends DomElement {
       break
       case 'video':
         element = document.createElement('VIDEO')
-        //element.onloadeddata = this.assetLoaded.bind(this)
-        element.oncanplaythrough = this.assetLoaded.bind(this)
+        element.onloadeddata = this.assetLoaded.bind(this)
         element.src = asset
       break
       case 'audio':
         element = document.createElement('AUDIO')
-        //element.onloadeddata = this.assetLoaded.bind(this)
-        element.oncanplaythrough = this.assetLoaded.bind(this)
+        element.onloadeddata = this.assetLoaded.bind(this)
         element.src = asset
       default:
       break
@@ -104,6 +102,12 @@ export default class Preloader extends DomElement {
   }
 
   preloadAllAssets(){
+    if (this.isIOS()){
+      this.assets = this.assets.filter(a=>{
+        const type = this.getTypeFromExtension(a)
+        return type !== 'audio'&& type !== 'video'
+      })
+    }
     this.assetsStarted = this.assets.map(asset=>this.preloadOneAsset(asset))
   }
 }

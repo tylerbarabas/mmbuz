@@ -108,4 +108,8 @@ export default class DomElement {
     if (typeof min !== 'number' || typeof max !== 'number') throw 'Args min and max required to be integers'
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  isIOS(){
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
 }
