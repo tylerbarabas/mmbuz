@@ -1,3 +1,4 @@
+import screenfull from 'screenfull'
 import DomElement from "./dom-element"
 
 export default class Stage extends DomElement {
@@ -93,14 +94,8 @@ export default class Stage extends DomElement {
 
   requestFullScreen(element = document.body) {
     var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen
-
-    if (requestMethod) { // Native full screen.
-        requestMethod.call(element)
-    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-        var wscript = new ActiveXObject("WScript.Shell")
-        if (wscript !== null) {
-            wscript.SendKeys("{F11}")
-        }
-    }
-  } 
+  console.log('screenfull is enabled?', screenfull.isEnabled)
+  if (screenfull.isEnabled) {
+      screenfull.request(element)
+  }
 }

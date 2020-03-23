@@ -51,6 +51,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
+    "screenfull": "^5.0.2",
     "uuidv4": "^6.0.6"
   }
 }
