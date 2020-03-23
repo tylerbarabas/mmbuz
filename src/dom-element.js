@@ -12,7 +12,9 @@ export default class DomElement {
   }
 
   dispatchEvent(evtName, params = {}){
-    var evt = new CustomEvent(evtName, params)
+    var evt = new CustomEvent(evtName, {
+      detail: params,
+    })
     this.dom.dispatchEvent(evt)
   }
 

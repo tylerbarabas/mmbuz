@@ -41,12 +41,23 @@ export default class MasterController extends DomElement {
   }
 
   preloadSequence(seq = this.currentSequence){
-    seq.preloader.addEvent('preloader-finished', this.preloadFinished.bind(this))
+    seq.preloader.addEvent('preloader-finished', this.preloaderFinished.bind(this))
+    seq.preloader.addEvent('preloader-asset-loaded', this.preloaderAssetLoaded.bind(this))
     seq.preloadAssets()
   }
 
-  preloadFinished(e){
+  preloaderFinished(e){
     const { hideOverlay } = this.currentSequence
     if (typeof hideOverlay === 'function') hideOverlay()
+  }
+
+  preloaderAssetLoaded(e){
+    const {
+      percentComplete,
+    } = e.detail
+    const {
+      updateLoadStatus
+    } = this.currentSequence
+    if (typeof updateLoadStatus === 'function') updateLoadStatus.call(this.currentSequence,percentComplete)
   }
 }
