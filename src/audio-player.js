@@ -26,7 +26,7 @@ export default class AudioPlayer extends DomElement {
   loadFile(audioPath, audioTitle='Untitled'){
     this.currentAudio.path = audioPath
     this.currentAudio.title = audioTitle
-    this.dom.addEventListener( "loadeddata", this.onFileLoad.bind(this) )
+    this.dom.onloadeddata = this.onFileLoad.bind(this)
     this.dom.src = audioPath
   }
 
