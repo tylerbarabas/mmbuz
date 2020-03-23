@@ -51,12 +51,12 @@ export default class Preloader extends DomElement {
       break
       case 'video':
         element = document.createElement('VIDEO')
-        element.addEventListener('load',this.assetLoaded.bind(this))
+        element.onloadeddata = this.assetLoaded.bind(this)
         element.src = asset
       break
       case 'audio':
         element = document.createElement('AUDIO')
-        element.addEventListener('loadeddata',this.assetLoaded.bind(this))
+        element.onloadeddata = this.assetLoaded.bind(this)
         element.src = asset
       default:
       break
