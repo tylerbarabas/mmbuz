@@ -38,7 +38,7 @@ export default class Sequence {
   init() {
     this.ap = new AudioPlayer()
     this.ap.init()
-    this.ap.addEvent("song-loaded",this.onSongLoaded.bind(this))
+    this.ap.addEvent('song-loaded',this.onSongLoaded.bind(this))
     this.ap.loadFile(this.audioPath, this.title)
 
     if (this.debugMode) {
