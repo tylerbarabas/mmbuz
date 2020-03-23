@@ -104,7 +104,7 @@ export default class Preloader extends DomElement {
   preloadAllAssets(){
     if (this.isIOS()){
       this.assets = this.assets.filter(a=>{
-        const type = this.getTypeFromExtension(a)
+        const type = this.getTypeFromExtension(this.getExtension(a))
         return type !== 'audio'&& type !== 'video'
       })
     }
