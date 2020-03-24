@@ -14,6 +14,7 @@ export default class AudioPlayer extends DomElement {
     }
     this.dom = null
     this.id = uuid()
+    console.log('ap constructor')
   }
 
   init() {
@@ -21,6 +22,7 @@ export default class AudioPlayer extends DomElement {
     this.dom.id = `ap-${this.id}`
     document.body.appendChild(this.dom)
     window.AP = this
+    console.log('ap init')
   }
 
   loadFile(audioPath, audioTitle='Untitled'){
@@ -28,11 +30,13 @@ export default class AudioPlayer extends DomElement {
     this.currentAudio.title = audioTitle
     this.dom.onloadeddata = this.onFileLoad.bind(this)
     this.dom.src = audioPath
+    console.log('ap loadFile')
   }
 
   onFileLoad(){
     this.loaded = true
     this.dispatchEvent( "song-loaded" )
+    console.log('ap song loaded')
   }
 
   play(){
