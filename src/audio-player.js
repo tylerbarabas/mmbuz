@@ -20,6 +20,7 @@ export default class AudioPlayer extends DomElement {
   init() {
     this.dom = document.createElement("AUDIO")
     this.dom.id = `ap-${this.id}`
+    if (this.isIOS()) this.dom.autoplay = true
     document.body.appendChild(this.dom)
     window.AP = this
     console.log('ap init')
