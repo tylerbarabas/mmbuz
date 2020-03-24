@@ -84,7 +84,6 @@ export default class Sequence {
   }
 
   play() {
-    console.log('sequence.play')
     this.playing = true
     this.ticker = setInterval(this.tick.bind(this),41)
     this.ap.play()
