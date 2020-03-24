@@ -39,7 +39,7 @@ export default class AudioPlayer extends DomElement {
     if (!this.loaded){
       throw 'Audio cannot play because it is not loaded.'
     } else if (this.playing) {
-      console.error 'Audio is already playing!'
+      console.error('Audio is already playing!')
       return
     }
     console.log('audioplayer.play')
@@ -53,7 +53,6 @@ export default class AudioPlayer extends DomElement {
   }
 
   stop(){
-    this.playing = false
     this.pause()
     this.setPosition(0)
   }

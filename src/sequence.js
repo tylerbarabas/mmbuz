@@ -36,10 +36,12 @@ export default class Sequence {
   }
 
   init() {
-    this.ap = new AudioPlayer()
-    this.ap.init()
-    this.ap.addEvent('song-loaded',this.onSongLoaded.bind(this))
-    this.ap.loadFile(this.audioPath, this.title)
+    if (this.audioPath !== null) {
+      this.ap = new AudioPlayer()
+      this.ap.init()
+      this.ap.addEvent('song-loaded',this.onSongLoaded.bind(this))
+      this.ap.loadFile(this.audioPath, this.title)
+    }
 
     if (this.debugMode) {
       this.inspector = new Inspector(this)
@@ -238,7 +240,7 @@ export default class Sequence {
 
   destroy(){
     if (this.debugMode) this.inspector.destroy()
-    this.ap.destroy()
+    if (this.ap) this.ap.destroy()
   }
 
   clearStage(){

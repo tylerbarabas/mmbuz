@@ -28,7 +28,7 @@ export default class MasterController extends DomElement {
     if (typeof this.sequences[this.currentIndex + 1] === "undefined") {
       throw "Cannot find next song sequence."
     }
-    this.currentSequence.pause()
+    if (this.currentSequence.isPlaying) this.currentSequence.pause()
     this.currentSequence.destroy()
     this.stage.clear()
     this.currentIndex += 1
