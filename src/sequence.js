@@ -96,7 +96,7 @@ export default class Sequence {
   }
 
   resetLooper(){
-    this.clearStage()
+    this.stage.clear()
     this.setPosition(this.looper.beginning)
     this.songEvents = Array.from(this.originalSongEvents)
   }
@@ -240,9 +240,6 @@ export default class Sequence {
   destroy(){
     if (this.debugMode) this.inspector.destroy()
     if (this.ap) this.ap.destroy()
-  }
-
-  clearStage(){
     this.stage.clear()
   }
 
