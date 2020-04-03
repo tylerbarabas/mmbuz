@@ -6,22 +6,25 @@ window.AudioContext = window.AudioContext||window.webkitAudioContext
 export default class AudioPlayer extends DomElement {
   constructor(){
     super()
+    if (window.AP){
+      throw 'Audio player already exists.'      
+    }
+    window.AP = this
+
     this.loaded = false
     this.playing = false
     this.currentAudio = {
       path: null,
       title: null
     }
-    this.dom = null
+    this.dom = document.createElement("AUDIO")
     this.id = uuid()
   }
 
   init() {
-    this.dom = document.createElement("AUDIO")
     this.dom.id = `ap-${this.id}`
     if (this.isIOS()) this.dom.autoplay = true
     document.body.appendChild(this.dom)
-    window.AP = this
   }
 
   loadFile(audioPath, audioTitle='Untitled'){
@@ -67,8 +70,8 @@ export default class AudioPlayer extends DomElement {
 
   destroy(){
     this.stop()
-    this.dom.parentNode.removeChild(this.dom)
-    delete this
-    delete window.AP
+//    this.dom.parentNode.removeChild(this.dom)
+//    delete this
+//    delete window.AP
   }
 }

@@ -34,11 +34,11 @@ export default class SpriteSheet extends DomElement {
 
   pause(e){
     if (!e.isTrusted) return //Still not sure why this pause listener double fires
-    this.animation.stop()
+    if(this.animation)this.animation.stop()
   }
 
   play(){
-    this.animation.play()
+    if (this.animation) this.animation.play()
   }
 
   findFrameDimension(o){
@@ -60,5 +60,10 @@ export default class SpriteSheet extends DomElement {
     this.animation = new createjs.Sprite(this.spritesheet, this.currentAnim)
 
     this.stage.addChild(this.animation)
+  }
+
+  destroy(){
+    window.AP.removeEvent("pause", this.pause)
+    window.AP.removeEvent("play", this.play)
   }
 }

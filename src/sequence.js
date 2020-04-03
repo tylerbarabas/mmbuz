@@ -21,7 +21,7 @@ export default class Sequence {
     this.songEvents = []
     this.originalSongEvents = []
 
-    this.ap = null
+    this.ap = window.AP || new AudioPlayer()
 
     this.isLooper = false
     this.looper = {
@@ -37,7 +37,6 @@ export default class Sequence {
 
   init() {
     if (this.audioPath !== null) {
-      this.ap = new AudioPlayer()
       this.ap.init()
       this.ap.addEvent('song-loaded',this.onSongLoaded.bind(this))
       this.ap.loadFile(this.audioPath, this.title)
@@ -49,6 +48,7 @@ export default class Sequence {
   }
 
   onSongLoaded() {
+    this.ap.removeEvent('song-loaded',this.onSongLoaded.bind(this))
     this.loaded = true
     this.looper.end = this.ap.dom.duration
     if (this.bpm !== null && this.timeSignature !== null &&this.instructions !== null) { 
