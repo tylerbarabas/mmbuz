@@ -113,6 +113,7 @@ export default class Sequence {
     }
 
     if (this.songEvents.length > 0 && this.songEvents[0].pos <= this.position) {
+      this.inspector.updateCurrentFunc(this.songEvents[0].funcName))
       this.songEvents[0].func()
       this.songEvents.shift()
     }

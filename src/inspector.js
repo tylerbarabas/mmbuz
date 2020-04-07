@@ -13,7 +13,7 @@ export default class Inspector extends DomElement {
       top: 0,
       left: 0,
       width: "200px",
-      height: "70px",
+      height: "105px",
       backgroundColor: "pink",
       paddingLeft: "10px",
       zIndex: 9999
@@ -24,6 +24,8 @@ export default class Inspector extends DomElement {
     this.timeElement.appendTo(this)
     this.barBeatElement = new DomElement()
     this.barBeatElement.appendTo(this)
+    this.currentFuncElement = new DomElement()
+    this.currentFuncElement.appendTo(this)
     document.body.addEventListener('keyup',this.keyUp.bind(this))
     this.appendTo(document.body)
   }
@@ -34,6 +36,10 @@ export default class Inspector extends DomElement {
     const twodps = time.slice(0,decimalIndex+3)
     this.timeElement.dom.innerText = parseFloat(twodps)
     this.barBeatElement.dom.innerText = `Bar: ${this.sequence.getBar(time)} Beat: ${this.sequence.getBeat(time)}`
+  }
+
+  updateCurrentFunc(func){
+    this.currentFuncElement.dom.innerText = func
   }
 
   keyUp(e){
