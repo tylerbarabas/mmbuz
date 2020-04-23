@@ -65,8 +65,6 @@ export default class SpriteSheet extends DomElement {
   destroy(){
     window.AP.removeEvent("pause", this.pause)
     window.AP.removeEvent("play", this.play)
-    setTimeout(()=>{
-      super.destroy()
-    },250)
+    super.destroy()
   }
 }
