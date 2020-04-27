@@ -63,6 +63,7 @@ export default class SpriteSheet extends DomElement {
   }
 
   destroy(){
+    createjs.Ticker.removeEventListener("tick", this.stage)
     window.AP.removeEvent("pause", this.pause)
     window.AP.removeEvent("play", this.play)
     setTimeout(()=>{

@@ -101,6 +101,7 @@ export default class DomElement {
 
   destroy(){
     this.dom.parentNode.removeChild(this.dom)
+    delete this.dom
     delete this
   }
 
